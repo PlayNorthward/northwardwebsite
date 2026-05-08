@@ -3,35 +3,526 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — MaxadMat.se</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body class="about-page">
+  <title>About Northward</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap');
 
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --white: #ffffff;
+      --off-white: rgba(255, 255, 255, 0.7);
+      --soft-white: rgba(255, 255, 255, 0.55);
+      --border: rgba(255, 255, 255, 1);
+      --panel: rgba(5, 5, 5, 0.58);
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      /* Optional page background. Replace about-background.jpg with your own image, or remove the url() line. */
+      background: #000000;
+      color: var(--white);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      --shot-scale: clamp(0.78, 0.38vw + 0.55, 1.35);
+    }
+
+    /* Background image and vignette layer.
+       This sits behind the screenshots, so it darkens only the page background. */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.34), transparent 24%, transparent 72%, rgba(0,0,0,0.46)),
+        radial-gradient(circle at center, rgba(45, 53, 58, 0.20) 0%, rgba(0,0,0,0.32) 60%, rgba(0,0,0,0.70) 100%),
+        url('about-background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* Header Nav */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 40px;
+      pointer-events: none;
+    }
+
+    .home-link,
+    .header-nav {
+      pointer-events: all;
+    }
+
+    .home-link,
+    .header-nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      position: relative;
+      transition: opacity 0.25s ease;
+    }
+
+    .home-link {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: none;
+      opacity: 0.95;
+    }
+
+    .home-link::after,
+    .header-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--white);
+      transition: width 0.3s ease;
+    }
+
+    .home-link:hover,
+    .header-nav a:hover {
+      opacity: 1;
+    }
+
+    .home-link:hover::after,
+    .header-nav a:hover::after,
+    .header-nav a.active::after,
+    .header-nav a[aria-current="page"]::after {
+      width: 100%;
+    }
+
+    .header-nav a.active,
+    .header-nav a[aria-current="page"] {
+      opacity: 1;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    /* Scattered Screenshots */
+    .screenshot-field {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .shot {
+      position: absolute;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      box-shadow:
+        0 16px 42px rgba(0, 0, 0, 0.72),
+        0 4px 14px rgba(0, 0, 0, 0.58),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      opacity: 0.94;
+      filter: saturate(1.08) contrast(1.03);
+      animation: driftIn 1s ease both;
+    }
+
+    .shot-1 { width: calc(clamp(210px, 20vw, 350px) * var(--shot-scale)); top: 11%; left: 4%; transform: rotate(-7deg); animation-delay: 0.05s; }
+    .shot-2 { width: calc(clamp(240px, 23vw, 400px) * var(--shot-scale)); top: 8%; right: 4%; transform: rotate(6deg); animation-delay: 0.12s; }
+    .shot-3 { width: calc(clamp(190px, 18vw, 320px) * var(--shot-scale)); top: 36%; left: 2%; transform: rotate(5deg); animation-delay: 0.2s; }
+    .shot-4 { width: calc(clamp(220px, 21vw, 370px) * var(--shot-scale)); top: 35%; right: 2%; transform: rotate(-6deg); animation-delay: 0.28s; }
+    .shot-5 { width: calc(clamp(250px, 24vw, 420px) * var(--shot-scale)); bottom: 12%; left: 6%; transform: rotate(7deg); animation-delay: 0.36s; }
+    .shot-6 { width: calc(clamp(200px, 19vw, 340px) * var(--shot-scale)); bottom: 11%; right: 7%; transform: rotate(-5deg); animation-delay: 0.44s; }
+    .shot-7 { width: calc(clamp(180px, 17vw, 300px) * var(--shot-scale)); bottom: 3%; left: 33%; transform: rotate(-2deg); animation-delay: 0.52s; }
+    .shot-8 { width: calc(clamp(210px, 20vw, 350px) * var(--shot-scale)); top: 3%; left: 38%; transform: rotate(3deg); animation-delay: 0.6s; }
+
+    @keyframes driftIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98) rotate(var(--start-rotate, 0deg)); }
+      to   { opacity: 0.94; }
+    }
+
+    /* Main Content */
+    main {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 120px 2rem 120px;
+    }
+
+    .about-panel {
+      width: min(720px, 92vw);
+      padding: 48px 52px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 28px 120px rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      animation: fadeUp 0.85s ease 0.18s both;
+    }
+
+    .about-kicker {
+      color: var(--off-white);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .about-panel h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(42px, 6vw, 78px);
+      font-weight: 400;
+      letter-spacing: 0.035em;
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .about-panel p {
+      color: var(--off-white);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .about-panel p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .about-btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border: 1.5px solid var(--white);
+      background: transparent;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.15s ease, opacity 0.25s ease;
+    }
+
+    .about-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .about-btn:active {
+      transform: scale(0.98);
+    }
+
+    .about-btn.secondary {
+      border-color: rgba(255, 255, 255, 0.45);
+      color: var(--off-white);
+    }
+
+    .about-btn.secondary:hover {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Bottom Corners */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 28px 40px;
+      pointer-events: none;
+    }
+
+    .company-logo {
+      pointer-events: all;
+      display: flex;
+      align-items: center;
+    }
+
+    .company-logo img {
+      height: 64px;
+      width: auto;
+      opacity: 0.85;
+      transition: opacity 0.25s ease;
+      filter: brightness(0) invert(1);
+    }
+
+    .company-logo:hover img {
+      opacity: 1;
+    }
+
+    .social-links {
+      pointer-events: all;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.25s ease, transform 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .social-links svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+
+    @media (min-width: 1600px) {
+      body {
+        --shot-scale: 1.16;
+      }
+    }
+
+    @media (min-width: 2200px) {
+      body {
+        --shot-scale: 1.32;
+      }
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow-y: auto;
+      }
+
+      .site-header {
+        padding: 22px 24px;
+      }
+
+      .header-nav {
+        gap: 22px;
+      }
+
+      main {
+        padding: 110px 22px 140px;
+        align-items: flex-start;
+      }
+
+      .about-panel {
+        padding: 36px 30px;
+        margin: 0 auto;
+      }
+
+      body {
+        --shot-scale: 0.78;
+      }
+
+      .shot {
+        opacity: 0.9;
+      }
+
+      .shot-1 { width: clamp(150px, 40vw, 250px); left: 2%; }
+      .shot-2 { width: clamp(170px, 46vw, 280px); right: 2%; }
+      .shot-5 { width: clamp(190px, 50vw, 300px); left: 3%; }
+      .shot-6 { width: clamp(160px, 42vw, 260px); right: 3%; }
+
+      .shot-3,
+      .shot-4,
+      .shot-7,
+      .shot-8 {
+        display: none;
+      }
+
+      .bottom-bar {
+        padding: 22px 24px;
+      }
+
+      .company-logo img {
+        height: 52px;
+      }
+
+      .social-links {
+        gap: 16px;
+      }
+
+      .social-links svg {
+        width: 27px;
+        height: 27px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .site-header {
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .header-nav {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+      }
+
+      .about-panel {
+        padding: 32px 24px;
+      }
+
+      .about-panel p {
+        font-size: 15px;
+      }
+
+      .bottom-bar {
+        align-items: center;
+      }
+
+      .company-logo img {
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scattered screenshot background -->
+  <!-- Screenshots are loaded from the Cloudflare R2 bucket. -->
+  <div class="screenshot-field" aria-hidden="true">
+    <img src="https://assets.playnorthward.com/Screenshot01.png" alt="" class="shot shot-1">
+    <img src="https://assets.playnorthward.com/Screenshot02.png" alt="" class="shot shot-2">
+    <img src="https://assets.playnorthward.com/Screenshot03.png" alt="" class="shot shot-3">
+    <img src="https://assets.playnorthward.com/Screenshot04.png" alt="" class="shot shot-4">
+    <img src="https://assets.playnorthward.com/Screenshot05.png" alt="" class="shot shot-5">
+    <img src="https://assets.playnorthward.com/Screenshot06.png" alt="" class="shot shot-6">
+    <img src="https://assets.playnorthward.com/Screenshot07.png" alt="" class="shot shot-7">
+    <img src="https://assets.playnorthward.com/Screenshot08.png" alt="" class="shot shot-8">
+  </div>
+
+  <!-- Header Navigation -->
   <header class="site-header">
-    <a href="/" class="logo">MaxadMat.se</a>
+    <a href="index.html" class="home-link" aria-label="Return to Northward home">Northward</a>
+
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="about.html" class="active" aria-current="page">About</a>
+      <a href="https://yoreandyonder.com/presskit/build/northward/index.html">Press Kit</a>
+    </nav>
   </header>
 
-  <main class="about-content">
-    <h1>About the project</h1>
+  <!-- Main Content -->
+  <main>
+    <section class="about-panel" aria-labelledby="about-title">
+      <div class="about-kicker">About the game</div>
+      <h1 id="about-title">Northward</h1>
 
-    <p>
-      Describe what problem you're solving and who it's for. Keep it short —
-      one or two sentences that someone can immediately understand.
-    </p>
+      <p>
+        Northward is an open-world multiplayer adventure about sailing a scrappy ship through a northern archipelago, uncovering the mystery of a fallen star, and exploring the remnants of an ancient civilization.
+      </p>
 
-    <p>
-      Explain why you're building this and what makes it different. What's the
-      insight or angle that others have missed?
-    </p>
+      <p>
+        Explore a variety of islands and biomes, quiet harbors and deep waters. Find old machines and strange ruins. Upgrade your vessel, gather useful tools and equipment, and follow the clues that lead farther north.
+      </p>
 
-    <p>
-      Optionally, say something about where the project is headed or when you
-      expect to launch.
-    </p>
+      <p>
+        Made by Yore &amp; Yonder, <b>Northward</b> is a mix of mystery, co-op adventure, and early-2000s animated-adventure spirit. With inspirations ranging from <i>Outer Wilds</i> and <i>Sea of Thieves</i> to <i>Treasure Planet</i> and <i>Atlantis: The Lost Empire</i>.
+      </p>
 
-    <a href="/" class="back-link">← Back to homepage</a>
+      <div class="about-actions">
+        <a href="https://store.steampowered.com/app/1876420/Northward" class="about-btn" target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
+        <a href="index.html" class="about-btn secondary">Back to Home</a>
+      </div>
+    </section>
   </main>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <!-- Company logo, bottom left -->
+    <a href="https://yoreandyonder.com" class="company-logo" aria-label="Yore & Yonder home">
+      <img src="companylogo.png" alt="Company Logo">
+    </a>
+
+    <!-- Social icons, bottom right -->
+    <div class="social-links">
+      <!-- Discord -->
+      <a href="https://discord.gg/northward" aria-label="Discord" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.054a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+        </svg>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@PlayNorthward" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </a>
+
+      <!-- X / Twitter -->
+      <a href="https://x.com/PlayNorthward" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/playnorthward" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 
 </body>
 </html>
