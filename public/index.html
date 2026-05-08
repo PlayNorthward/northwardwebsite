@@ -118,7 +118,7 @@
     /* ── Game Logo ── */
     .game-logo {
       width: auto;
-      max-width: min(1120px, 164vw);
+      max-width: min(1120px, 82vw);
       height: auto;
       display: block;
       /*filter: drop-shadow(0 2px 40px rgba(0,0,0,0.5)); */
@@ -366,6 +366,216 @@
       width: 30px;
       height: 30px;
       fill: currentColor;
+    }
+
+
+
+    /* ── Mobile / Responsive adjustments ── */
+    @media (max-width: 900px) {
+      html, body {
+        min-height: 100%;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .video-wrapper video {
+        object-position: center center;
+      }
+
+      .site-header {
+        padding: 22px 24px;
+      }
+
+      .header-nav {
+        gap: 22px;
+      }
+
+      .header-nav a {
+        font-size: 12px;
+        letter-spacing: 0.11em;
+      }
+
+      main {
+        min-height: 100svh;
+        padding: 96px 24px 128px;
+        gap: 18px;
+      }
+
+      .game-logo {
+        max-width: min(980px, 130vw);
+      }
+
+      .wishlist-btn {
+        font-size: 17px;
+        padding: 12px 32px;
+        letter-spacing: 0.12em;
+      }
+
+      .bottom-bar {
+        padding: 22px 24px;
+      }
+
+      .company-logo img {
+        height: 52px;
+      }
+
+      .social-links {
+        gap: 16px;
+      }
+
+      .social-links svg {
+        width: 27px;
+        height: 27px;
+      }
+
+      .modal {
+        width: min(400px, calc(100vw - 40px));
+        padding: 42px 34px 34px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .site-header {
+        padding: 20px 20px;
+        justify-content: center;
+      }
+
+      .header-nav {
+        gap: 24px;
+      }
+
+      .header-nav a {
+        font-size: 11px;
+      }
+
+      main {
+        min-height: 100svh;
+        padding: 88px 18px 132px;
+        justify-content: center;
+        transform: translateY(-8px);
+      }
+
+      .game-logo {
+        max-width: 136vw;
+        width: auto;
+      }
+
+      .wishlist-btn {
+        width: min(320px, 86vw);
+        padding: 13px 18px;
+        font-size: 15px;
+        text-align: center;
+        letter-spacing: 0.1em;
+        margin-top: 2px;
+      }
+
+      .newsletter-link {
+        font-size: 12px;
+        padding: 8px 0;
+      }
+
+      .bottom-bar {
+        padding: 18px 20px;
+        align-items: center;
+      }
+
+      .company-logo img {
+        height: 44px;
+      }
+
+      .social-links {
+        gap: 13px;
+      }
+
+      .social-links svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .modal-backdrop {
+        align-items: flex-start;
+        padding-top: 92px;
+      }
+
+      .modal {
+        width: calc(100vw - 32px);
+        padding: 40px 24px 28px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .site-header {
+        padding: 18px 16px;
+      }
+
+      .header-nav {
+        gap: 18px;
+      }
+
+      main {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .game-logo {
+        max-width: 146vw;
+      }
+
+      .wishlist-btn {
+        width: min(300px, 90vw);
+        font-size: 14px;
+      }
+
+      .bottom-bar {
+        padding: 16px;
+      }
+
+      .company-logo img {
+        height: 38px;
+      }
+
+      .social-links {
+        gap: 11px;
+      }
+
+      .social-links svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    @media (max-height: 680px) and (max-width: 560px) {
+      main {
+        padding-top: 74px;
+        padding-bottom: 104px;
+        gap: 12px;
+        transform: translateY(-2px);
+      }
+
+      .game-logo {
+        max-width: 120vw;
+      }
+
+      .wishlist-btn {
+        padding-top: 11px;
+        padding-bottom: 11px;
+      }
+
+      .bottom-bar {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .company-logo img {
+        height: 36px;
+      }
+
+      .social-links svg {
+        width: 21px;
+        height: 21px;
+      }
     }
 
     /* ── Screen reader only ── */
