@@ -1,0 +1,12 @@
+name = "northwardwebsite"
+compatibility_date = "2026-05-08"
+main = "src/worker.js"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "waitlist"
+database_id = "6f7f4906-939e-4ee3-8c38-3d307eb3410f"

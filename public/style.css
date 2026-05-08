@@ -1,0 +1,217 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --accent: #6ee7b7;
+  --text: #f9fafb;
+  --overlay: rgba(0, 0, 0, 0.52);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Video background ── */
+
+.video-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+}
+
+/* ── Landing page ── */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  opacity: 0.8;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+/* ── Waitlist form ── */
+
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.waitlist-form input[type="email"] {
+  width: 100%;
+  padding: 0.8rem 1.1rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.waitlist-form input[type="email"]::placeholder {
+  opacity: 0.5;
+}
+
+.waitlist-form input[type="email"]:focus {
+  border-color: var(--accent);
+}
+
+.waitlist-form button {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.waitlist-form button:hover {
+  opacity: 0.88;
+}
+
+.waitlist-form button:active {
+  transform: scale(0.98);
+}
+
+.form-message {
+  font-size: 0.88rem;
+  min-height: 1.2em;
+  opacity: 0.9;
+}
+
+.form-message.success {
+  color: var(--accent);
+}
+
+.form-message.error {
+  color: #fca5a5;
+}
+
+.page-nav {
+  margin-top: 0.5rem;
+}
+
+.page-nav a {
+  color: var(--text);
+  opacity: 0.6;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: opacity 0.2s;
+}
+
+.page-nav a:hover {
+  opacity: 1;
+}
+
+/* ── About page ── */
+
+.about-page {
+  background: #0d1117;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-header .logo {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.about-content {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  line-height: 1.75;
+}
+
+.about-content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.about-content p {
+  opacity: 0.8;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

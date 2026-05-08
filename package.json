@@ -1,0 +1,12 @@
+{
+  "name": "cloudflare-test-proj",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:export": "wrangler d1 execute waitlist --remote --command \"SELECT email, submitted_at FROM emails ORDER BY submitted_at;\" --json"
+  },
+  "devDependencies": {
+    "wrangler": "^4.88.0"
+  }
+}
